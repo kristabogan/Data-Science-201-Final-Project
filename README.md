@@ -7,30 +7,38 @@
 # DS201: Machine Learning Classification on Wheat Seed Varieties
 # By Krista Bogan and Jessica Booth
 
-The purpose of this analysis is to craft a machine learning algorithm
-to assist the sorting process of wheat seeds in the food industry. In this analysis,
-we will be constructing the best classification algorithm for "Seeds", a dataset
+In this analysis, we will be constructing the best classification algorithm for "Seeds", a dataset
 viewing the various geometric properties of three varieties of wheat seed.
 During data collection, a soft X-ray technique and GRAINS package were
 used to create the 7 real attributes in the data set. We will be
 evaluating which algorithm can best classify and predict the wheat
 seed level from the given attributes.
 
-The data can be found on UCI's Machine Learning repository:
+The data can be found on UCI's Machine Learning repository [here](https://archive.ics.uci.edu/ml/datasets/seeds)
 
 
-_Welcome to "Introduction to GitHub"! :wave:_
 
-**What is GitHub?**: GitHub is a collaboration platform that uses [Git](https://docs.github.com/get-started/quickstart/github-glossary#git) for versioning. GitHub is a popular place to share and contribute to [open-source](https://docs.github.com/get-started/quickstart/github-glossary#open-source) software.
-<br>:tv: [Video: What is GitHub?](https://www.youtube.com/watch?v=w3jLJU7DT5E)
+**What is the purpose of the dataset?**: The purpose of this analysis is to craft a machine learning algorithm
+to assist the sorting process of wheat seeds in the food industry.
 
-**What is a repository?**: A [repository](https://docs.github.com/get-started/quickstart/github-glossary#repository) is a project containing files and folders. A repository tracks versions of files and folders.
-<br>:tv: [Video: Exploring a repository](https://www.youtube.com/watch?v=R8OAwrcMlRw)
+**What are the attributes of the dataset?**: The dataset views 7 different geometric attributes of kernels.
 
-**What is a branch?**: A [branch](https://docs.github.com/en/get-started/quickstart/github-glossary#branch) is a parallel version of your repository. By default, your repository has one branch named `main` and it is considered to be the definitive branch. You can create additional branches off of `main` in your repository. You can use branches to have different versions of a project at one time.
+1\. Area, A
 
-On additional branches, you can make edits without impacting the `main` version. Branches allow you to separate your work from the `main` branch. In other words, everyone's work is safe while you contribute.
-<br>:tv: [Video: Branches](https://www.youtube.com/watch?v=xgQmu81G1yY)
+2\. Perimeter, P
+
+3\. Compactness C = 4*pi*A/P\^2
+
+4\. Kernel length
+
+5\. Kernel width
+
+6\. Asymmetry coefficient
+
+7\. Kernel groove length.
+
+The class for this data set is wheat variety. There are 3 disctinct wheat varieties in the dataset. We could not find specifics on the wheat varieties. 
+
 
 **What is a profile README?**: A [profile README](https://docs.github.com/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme) is essentially an "About me" section on your GitHub profile where you can share information about yourself with the community on GitHub.com. GitHub shows your profile README at the top of your profile page.
 
