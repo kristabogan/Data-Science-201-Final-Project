@@ -18,8 +18,7 @@ The data can be found on UCI's Machine Learning repository [here](https://archiv
 
 
 
-**What is the purpose of the dataset?**: The purpose of this analysis is to craft a machine learning algorithm
-to assist the sorting process of wheat seeds in the food industry.
+**What is the purpose of the dataset?**: The purpose of this analysis is to craft a machine learning algorithm to assist the sorting process of wheat seeds in the food industry.
 
 **What are the attributes of the dataset?**: The dataset views 7 different geometric attributes of kernels. The class for this data set is wheat variety. There are 3 disctinct wheat varieties in the dataset. We could not find specifics on the wheat varieties. 
 
@@ -39,6 +38,8 @@ to assist the sorting process of wheat seeds in the food industry.
 
 
 **What analyses does the code conduct?**: The code analyzes everything from descriptive statistics to full ML algorithm selected. We began by viewing the boxplots of individual attributions, followed by multivariate plots to evaluate the relationship between the attributions and classes.
+
+<img alt="image showing my-first-branch entry" src="/images/my-first-branch.png"/>
 
 ### :keyboard: Activity: Your first branch
 
