@@ -61,7 +61,7 @@ We split the dataset, seeds, into two halves. We decided to use the
 80/20 method, where 80% of the training data will be used to train our
 models, and 20% will be used as a validation dataset.
 
-```{r validation}
+```{r Validation}
 # Create the as.factor variable for class #
 
 seeds$TypeFac <- as.factor(seeds$Type)
@@ -85,7 +85,7 @@ also see that our attributes are all numeric, with a factored class of
 wheat variety. The head() function also shows us the first couple of
 rows of data, to give us a better idea of what we are looking at.
 
-```{r describe}
+```{r Describe}
 dim(seeds)
 sapply(seeds, class)
 head(seeds)
@@ -95,7 +95,7 @@ Using levels(), we can view the different levels to our factored class.
 As previously described, we can see that there are three different wheat
 varieties that we will be classifying in our model.
 
-```{r}
+```{r Levels}
 levels(seeds$TypeFac)
 ```
 
@@ -103,7 +103,7 @@ The percentage of observations for each level of class is relatively
 equal across the groups. This is important to ensure our data is normal
 and fair, and each level has enough observations for analysis.
 
-```{r}
+```{r Percentage}
 percentage <- prop.table(table(seeds$Type)) * 100
 cbind(freq=table(seeds$Type), percentage=percentage)
 ```
@@ -116,7 +116,7 @@ variety of numerical ranges across the different attributes. The
 attributes use the same scale (cm) and are different due to the nature
 of the variable (for example, *area* will differ from *groove length*).
 
-```{r}
+```{r Summary}
 summary(seeds)
 ```
 
@@ -125,7 +125,7 @@ univariate and multivariate plots of the data to view the spread of the
 data. The plots give us a visual representation of the numerical range
 of each individual attribute.
 
-```{r Initial PPlot, echo=FALSE}
+```{r Initial Plot, echo=FALSE}
 x <- seeds[,1:7]
 y <- seeds$TypeFac
 
@@ -140,7 +140,7 @@ Now we can perform multivariate plots to look at the relationship
 between our classes and attributes. Below is a scatterplot matrix with
 ellipses surrounding the clusters of data.
 
-```{r Initial Plott, echo=FALSE}
+```{r Initial Plot Two, echo=FALSE}
 featurePlot(x=x, y=y, plot="ellipse")
 ```
 
@@ -148,7 +148,7 @@ We then created a boxplot representation of the relationships between
 the classes and the attributes. We believe that this plot in particular
 gives us a clear idea of the different trends present.
 
-```{r Initial Plottt, echo=FALSE}
+```{r Initial Plot Three, echo=FALSE}
 featurePlot(x=x, y=y, plot="box", scales=scales)
 
 ```
@@ -156,7 +156,7 @@ featurePlot(x=x, y=y, plot="box", scales=scales)
 As a final multivariate plot, we will be looking at the
 distribution-like curve.
 
-```{r plotss}
+```{r Inital Plot Four}
 scales <- list(x=list(relation="free"), y=list(relation="free"))
 featurePlot(x=x, y=y, plot="density", scales=scales)
 
@@ -193,7 +193,7 @@ instances by the total number of instances, in percentage form. This
 process provides reliable estimates of algorithm performance on the data
 that is not seen.
 
-```{r}
+```{r Algorithm Validation}
 # Run algorithms using 10-fold cross validation
 control <- trainControl(method="cv", number=10)
 metric <- "Accuracy"
@@ -236,7 +236,7 @@ evaluated against one another.
     uses multiple different decision trees to make decisions on
     classification.
 
-```{r}
+```{r Building Algorithms}
 set.seed(7)
 fit.lda <- train(x, y, method="lda", preProcess="scale", trControl=control)
 
@@ -260,7 +260,7 @@ level. In our summary, LDA has a much higher accuracy in comparison to
 the other algorithms. We can also see from the Accuracy/Kappa charts
 that LDA is consistently the most accurate.
 
-```{r}
+```{r Results}
 results <- resamples(list(lda=fit.lda, cart=fit.cart, knn=fit.knn, svm=fit.svm, rf=fit.rf))
 summary(results)
 dotplot(results)
@@ -271,7 +271,7 @@ As we can see, across the 10-fold cross validations, the LDA algorithm
 had an accuracy of 97.6% Although it isn't perfect, it's definitely a
 highly accurate classification model for the grouping wheat seeds.
 
-```{r hih}
+```{r LDA Print}
 print(fit.lda)
 
 ```
@@ -284,7 +284,7 @@ overwhelming evidence to suggest that a Linear Discriminant Analysis
 algorithm is the most proficient in classifying wheat variety by our 7
 geometric attributes.
 
-```{r}
+```{r Predict}
 
 predictions <- predict(fit.lda, validation)
 confusionMatrix(predictions, validation$TypeFac)
