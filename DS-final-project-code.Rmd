@@ -1,0 +1,292 @@
+---
+title: "DS-Final-Project"
+output:
+  pdf_document: default
+  html_document: default
+date: "2022-12-07"
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+seeds <- read.csv("seeds.csv")
+install.packages("ggplot2")
+install.packages("caret")
+install.packages("ellipse")
+library("ellipse")
+library(caret)
+library(ggplot2)
+```
+
+## Data Science Final Project
+
+**Background**
+
+[Purpose]{.underline}*:* The purpose of this analysis is to craft
+machine learning algorithm to assist the sorting process of wheat seeds
+in the foot industry.
+
+In this analysis, we will be constructing the best classification
+algorithm for "Seeds", a dataset viewing the various geometric
+properties of three varieties of wheat seed. During data collection, a
+soft X-ray technique and GRAINS package were used to create the 7 real
+attributes in the data set. We will be evaluating which algorithm can
+best classify and predict the wheat seed level from the given
+attributes. The data was downloaded from the UCI Machine Learning
+Repository, under "seeds Data Set".
+
+The following are the seven geometric attributes measured:
+
+1\. Area, A
+
+2\. Perimeter, P
+
+3\. Compactness C = 4*pi*A/P\^2
+
+4\. Kernel length
+
+5\. Kernel width
+
+6\. Asymmetry coefficient
+
+7\. Kernel groove length.
+
+The class is three varieties of wheat. In order to make the levels for
+the attributes a factored variable, we created a new column under
+"TypeFac", the factored version of the class variable, Type. Before
+getting into any statistics, we began by creating a validation dataset.
+We split the dataset, seeds, into two halves. We decided to use the
+80/20 method, where 80% of the training data will be used to train our
+models, and 20% will be used as a validation dataset.
+
+```{r validation}
+# Create the as.factor variable for class #
+
+seeds$TypeFac <- as.factor(seeds$Type)
+
+# Create list of 80% of the rows we will use for training data
+
+validation_index <- createDataPartition(seeds$Type, p=0.80, list=FALSE)
+
+# Selecting the remaining 20% as validation data
+
+validation <- seeds[-validation_index,]
+
+# Use the 80% list of rows on training and testing the models
+seeds <- seeds[validation_index,]
+```
+
+We then decided to conduct descriptive statistics and peek at our data
+before crafting our models. We can see that our data includes 199
+instances and 9 attributes (including Type and factored Type). We can
+also see that our attributes are all numeric, with a factored class of
+wheat variety. The head() function also shows us the first couple of
+rows of data, to give us a better idea of what we are looking at.
+
+```{r describe}
+dim(seeds)
+sapply(seeds, class)
+head(seeds)
+```
+
+Using levels(), we can view the different levels to our factored class.
+As previously described, we can see that there are three different wheat
+varieties that we will be classifying in our model.
+
+```{r}
+levels(seeds$TypeFac)
+```
+
+The percentage of observations for each level of class is relatively
+equal across the groups. This is important to ensure our data is normal
+and fair, and each level has enough observations for analysis.
+
+```{r}
+percentage <- prop.table(table(seeds$Type)) * 100
+cbind(freq=table(seeds$Type), percentage=percentage)
+```
+
+**Summary and Descriptive Statistics**
+
+Now that we have evaluated the attributes of our dataset, we can go
+about conducting our summary statistics. From summary(), we can see the
+variety of numerical ranges across the different attributes. The
+attributes use the same scale (cm) and are different due to the nature
+of the variable (for example, *area* will differ from *groove length*).
+
+```{r}
+summary(seeds)
+```
+
+Upon running the summary statistics, we decided to look at both
+univariate and multivariate plots of the data to view the spread of the
+data. The plots give us a visual representation of the numerical range
+of each individual attribute.
+
+```{r Initial PPlot, echo=FALSE}
+x <- seeds[,1:7]
+y <- seeds$TypeFac
+
+par(mfrow=c(1,4))
+for(i in 1:7) {
+  boxplot(x[,i], main=names(seeds)[i])
+}
+
+```
+
+Now we can perform multivariate plots to look at the relationship
+between our classes and attributes. Below is a scatterplot matrix with
+ellipses surrounding the clusters of data.
+
+```{r Initial Plott, echo=FALSE}
+featurePlot(x=x, y=y, plot="ellipse")
+```
+
+We then created a boxplot representation of the relationships between
+the classes and the attributes. We believe that this plot in particular
+gives us a clear idea of the different trends present.
+
+```{r Initial Plottt, echo=FALSE}
+featurePlot(x=x, y=y, plot="box", scales=scales)
+
+```
+
+As a final multivariate plot, we will be looking at the
+distribution-like curve.
+
+```{r plotss}
+scales <- list(x=list(relation="free"), y=list(relation="free"))
+featurePlot(x=x, y=y, plot="density", scales=scales)
+
+```
+
+Using the information from all three multivariate plots, there are a
+couple of trend observations that can be made before algorithm creation.
+It seems as though wheat variety 3 likely has a higher asymmetry
+coefficient, and a lower area and perimeter. It also seems as though
+wheat variety 2 has a greater overall area and perimeter in comparison
+to the other wheat varieties.
+
+Now that we have evaluated the trends and relationships of the class and
+attributes, we can go ahead and begin crafting the algorithms.
+
+**Building Our Algorithms**
+
+The algorithm building process consists of three steps:
+
+1\. Set up the test harness and use 10-fold cross validation
+
+2\. Build 5 different models to predict seed type from measurements
+
+3\. Select the best model using accuracy measures
+
+For the test harness, we performed a 10-fold cross validation to
+estimate accuracy. We randomly divided our dataset into 10 parts. Then,
+we used 9 parts of that split for training, and save the last part for
+testing. The way that cross validation works is that we repeat this
+process 10 times, using a different 10th part for testing each time. The
+metric that we are using is called "Accuracy" to evaluate performance of
+our models. Accuracy is the ratio of the number of correctly predicted
+instances by the total number of instances, in percentage form. This
+process provides reliable estimates of algorithm performance on the data
+that is not seen.
+
+```{r}
+# Run algorithms using 10-fold cross validation
+control <- trainControl(method="cv", number=10)
+metric <- "Accuracy"
+```
+
+Upon running 10-fold cross validation, we can begin by building our
+models. For this analysis, we crafted 5 different models to get a good
+combination of linear, nonlinear, and complex nonlinear algorithms. We
+reset the seed building each model to make sure that each algorithm uses
+the same data splits. By doing this, our algorithms can be compared and
+evaluated against one another.
+
+1.  Linear Discriminant Analysis (LDA)
+
+    A dimensionality reduction technique used for supervised
+    classification problems. It is a simple linear analysis that creates
+    the highest possible discrimination across different classes (in
+    this case, the three wheat varieties).
+
+2.  Classification and Regression Trees (CART)
+
+    A predictive algorithm that explains how classes can be predicted by
+    other attributes.
+
+3.  k-Nearest Neighbors (kNN):
+
+    A data classification method that estimates the probability that a
+    given data point will be under one group or another depending on the
+    points closest to it.
+
+4.  Support Vector Machines (SVM) with a linear kernel:
+
+    Supervised learning models used for classification, regression, and
+    outlier detection. Identifies and classifies based on data point
+    positions to the hyperplane.
+
+5.  Random Forest (RF):
+
+    Supervised learning technique that is a tree-based algorithm. It
+    uses multiple different decision trees to make decisions on
+    classification.
+
+```{r}
+set.seed(7)
+fit.lda <- train(x, y, method="lda", preProcess="scale", trControl=control)
+
+set.seed(7)
+fit.cart <- train(x, y, method="rpart", preProcess="scale", trControl=control)
+
+set.seed(7)
+fit.knn <- train(x, y, method="knn", preProcess="scale", trControl=control)
+
+set.seed(7)
+fit.svm <- train(x, y, method="svmRadial", preProcess="scale", trControl=control)
+
+set.seed(7)
+fit.rf <- train(x, y, method="rf", preProcess="scale", trControl=control)
+```
+
+Now that we have crafted all of our models, we can view the accuracy of
+each to decide which is the best for our dataset. Evaluating our
+results, it is clear that the LDA algorithm returns the highest accuracy
+level. In our summary, LDA has a much higher accuracy in comparison to
+the other algorithms. We can also see from the Accuracy/Kappa charts
+that LDA is consistently the most accurate.
+
+```{r}
+results <- resamples(list(lda=fit.lda, cart=fit.cart, knn=fit.knn, svm=fit.svm, rf=fit.rf))
+summary(results)
+dotplot(results)
+```
+
+We decided to run the results of LDA separately as a final evaluation.
+As we can see, across the 10-fold cross validations, the LDA algorithm
+had an accuracy of 97.6% Although it isn't perfect, it's definitely a
+highly accurate classification model for the grouping wheat seeds.
+
+```{r hih}
+print(fit.lda)
+
+```
+
+As a final step in our analysis, we made some predictions with our
+algorithm. In our prediction test, the algorithm accuracy was about
+97.4%. It is important to conduct a final check of the accuracy in case
+we made an error somewhere in our algorithm building. Overall, we have
+overwhelming evidence to suggest that a Linear Discriminant Analysis
+algorithm is the most proficient in classifying wheat variety by our 7
+geometric attributes.
+
+```{r}
+
+predictions <- predict(fit.lda, validation)
+confusionMatrix(predictions, validation$TypeFac)
+
+```
