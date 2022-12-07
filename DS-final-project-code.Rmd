@@ -24,9 +24,9 @@ library(ggplot2)
 
 **Background**
 
-[Purpose]{.underline}*:* The purpose of this analysis is to craft
+[Purpose]{.underline}*:* The purpose of this analysis is to craft a
 machine learning algorithm to assist the sorting process of wheat seeds
-in the foot industry.
+in the food industry.
 
 In this analysis, we will be constructing the best classification
 algorithm for "Seeds", a dataset viewing the various geometric
