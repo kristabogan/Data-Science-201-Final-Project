@@ -21,7 +21,7 @@ The data can be found on UCI's Machine Learning repository [here](https://archiv
 **What is the purpose of the dataset?**: The purpose of this analysis is to craft a machine learning algorithm
 to assist the sorting process of wheat seeds in the food industry.
 
-**What are the attributes of the dataset?**: The dataset views 7 different geometric attributes of kernels.
+**What are the attributes of the dataset?**: The dataset views 7 different geometric attributes of kernels. The class for this data set is wheat variety. There are 3 disctinct wheat varieties in the dataset. We could not find specifics on the wheat varieties. 
 
 1\. Area, A
 
@@ -37,10 +37,8 @@ to assist the sorting process of wheat seeds in the food industry.
 
 7\. Kernel groove length.
 
-The class for this data set is wheat variety. There are 3 disctinct wheat varieties in the dataset. We could not find specifics on the wheat varieties. 
 
-
-**What is a profile README?**: A [profile README](https://docs.github.com/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme) is essentially an "About me" section on your GitHub profile where you can share information about yourself with the community on GitHub.com. GitHub shows your profile README at the top of your profile page.
+**What analyses does the code conduct?**: The code analyzes everything from descriptive statistics to full ML algorithm selected. We began by viewing the boxplots of individual attributions, followed by multivariate plots to evaluate the relationship between the attributions and classes.
 
 ### :keyboard: Activity: Your first branch
 
