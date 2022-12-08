@@ -7,18 +7,18 @@
 # DS201: Machine Learning Classification on Wheat Seed Varieties
 # By Krista Bogan and Jessica Booth
 
+The data can be found on UCI's Machine Learning repository [here](https://archive.ics.uci.edu/ml/datasets/seeds)
+
+To run the code in Kaggle, please click [here](https://www.kaggle.com/code/kristabogan/ds-final-project-bogan-booth/notebook)
+
 In this analysis, we will be constructing the best classification algorithm for "Seeds", a dataset viewing the various geometric properties of three varieties of wheat seed. The wheat seeds are the varieties Kama, Rosa and Canadian.
 
-<img alt="image showing my-first-branch entry" src="/images/Wheat%20Varieties.png"/>
+<img alt="image showing the three wheat varieties" src="/images/Wheat%20Varieties.png"/>
 
 During data collection, a soft X-ray technique and GRAINS package were
 used to create the 7 real attributes in the data set. We will be
 evaluating which algorithm can best classify and predict the wheat
 seed level from the given attributes.
-
-The data can be found on UCI's Machine Learning repository [here](https://archive.ics.uci.edu/ml/datasets/seeds)
-
-To run the code in Kaggle, please click [here](https://www.kaggle.com/code/kristabogan/ds-final-project-bogan-booth/notebook)
 
 # Business Understanding
 
@@ -46,179 +46,145 @@ To run the code in Kaggle, please click [here](https://www.kaggle.com/code/krist
 **What analyses does the code conduct?**: The code analyzes everything from descriptive statistics to full ML algorithm selected. We began by viewing the boxplots of individual attributions, followed by multivariate plots to evaluate the relationship between the attributions and classes.
 
 # Data Preparation
+
+The class is three varieties of wheat, as described in the previous section. In order to make the levels for the attributes a factored variable, we created a new column under
+"TypeFac", the factored version of the class variable, Type. Before
+getting into any statistics, we began by creating a validation dataset.
+We split the dataset, seeds, into two halves. We decided to use the
+80/20 method, where 80% of the training data will be used to train our
+models, and 20% will be used as a validation dataset.
+
+<img alt="validation" src="/images/validation.JPG"/>
+
+We then decided to conduct descriptive statistics and peek at our data
+before crafting our models. We can see that our data includes 199
+instances and 9 attributes (including Type and factored Type). We can
+also see that our attributes are all numeric, with a factored class of
+wheat variety.
+
+<img alt="sapply" src="/images/sapply.JPG"/>
+
+<img alt="head()" src="/images/head().JPG"/>
+
+Now that we have evaluated the attributes of our dataset, we can go
+about conducting our summary statistics. Using the summary statistics, below are a couple of univariate plots evaluating our isolated variables. Below are two types of barcharts: one showing the averages for each attribute, regardless of wheat variety, and the other ensuring that each level has roughly the same number of observations.
+
+<img alt="3" src="/images/Rplot003.png"/>
+<img alt="4" src="/images/Rplot004.png"/>
+
+Now, we can create multivariate plots investigating the relationship between the attributes and wheat varieties. Below is a scatterplot matrix with ellipses surrounding the clusters of data. This gives us an understanding of the mean distribution for each attribute, colored by level. Green indicates Kama seeds, blue indicates Rosa seeds, and pink represents Canadian seeds.
+
+<img alt="5" src="/images/Rplot005.png"/>
+
+We then created a boxplot representation of the relationships between
+the classes and the attributes. We believe that this plot in particular
+gives us a clear idea of the different trends present.
+
+<img alt="5" src="/images/Rplot007.png"/>
+
+As a final multivariate plot, we will be looking at the
+distribution-like curve.
+
+<img alt="5" src="/images/Rplot006.png"/>
+
+Using the information from all three multivariate plots, there are a
+couple of trend observations that can be made before algorithm creation.
+It seems as though wheat variety 3 likely has a higher asymmetry
+coefficient, and a lower area and perimeter. It also seems as though
+wheat variety 2 has a greater overall area and perimeter in comparison
+to the other wheat varieties.
+
+Now that we have evaluated the trends and relationships of the class and
+attributes, we can go ahead and begin crafting the algorithms.
+
 # Data Modeling
+
+The algorithm building process consists of three steps:
+
+1\. Set up the test harness and use 10-fold cross validation
+
+2\. Build 5 different models to predict seed type from measurements
+
+3\. Select the best model using accuracy measures
+
+For the test harness, we performed a 10-fold cross validation to
+estimate accuracy. We randomly divided our dataset into 10 parts. Then,
+we used 9 parts of that split for training, and save the last part for
+testing. The way that cross validation works is that we repeat this
+process 10 times, using a different 10th part for testing each time. The
+metric that we are using is called "Accuracy" to evaluate performance of
+our models. Accuracy is the ratio of the number of correctly predicted
+instances by the total number of instances, in percentage form. This
+process provides reliable estimates of algorithm performance on the data
+that is not seen.
+
+<img alt="10fold" src="/images/10fold.JPG"/>
+
+Upon running 10-fold cross validation, we can begin by building our
+models. For this analysis, we crafted 5 different models to get a good
+combination of linear, nonlinear, and complex nonlinear algorithms. We
+reset the seed building each model to make sure that each algorithm uses
+the same data splits. By doing this, our algorithms can be compared and
+evaluated against one another.
+
+1.  Linear Discriminant Analysis (LDA)
+
+    A dimensionality reduction technique used for supervised
+    classification problems. It is a simple linear analysis that creates
+    the highest possible discrimination across different classes (in
+    this case, the three wheat varieties).
+
+2.  Classification and Regression Trees (CART)
+
+    A predictive algorithm that explains how classes can be predicted by
+    other attributes.
+
+3.  k-Nearest Neighbors (kNN):
+
+    A data classification method that estimates the probability that a
+    given data point will be under one group or another depending on the
+    points closest to it.
+
+4.  Support Vector Machines (SVM) with a linear kernel:
+
+    Supervised learning models used for classification, regression, and
+    outlier detection. Identifies and classifies based on data point
+    positions to the hyperplane.
+
+5.  Random Forest (RF):
+
+    Supervised learning technique that is a tree-based algorithm. It
+    uses multiple different decision trees to make decisions on
+    classification.
+    
+<img alt="alg" src="/images/alg.JPG"/>
+
 # Model Evaluation
+
+Now that we have crafted all of our models, we can view the accuracy of
+each to decide which is the best for our dataset. Evaluating our
+results, it is clear that the LDA algorithm returns the highest accuracy
+level. In our summary, LDA has a much higher accuracy in comparison to
+the other algorithms. We can also see from the Accuracy/Kappa charts
+that LDA is consistently the most accurate.
+
+<img alt="8" src="/images/Rplot008.png"/>
+
+We decided to run the results of LDA separately as a final evaluation.
+As we can see, across the 10-fold cross validations, the LDA algorithm
+had an accuracy of 97.6% Although it isn't perfect, it's definitely a
+highly accurate classification model for the grouping wheat seeds.
+
+<img alt="accuracy" src="/images/accuracy.JPG"/>
+
+As a final step in our analysis, we made some predictions with our
+algorithm. In our prediction test, the algorithm accuracy was about
+97.4%. It is important to conduct a final check of the accuracy in case
+we made an error somewhere in our algorithm building. Overall, we have
+overwhelming evidence to suggest that a Linear Discriminant Analysis
+algorithm is the most proficient in classifying wheat variety by our 7
+geometric attributes.
+
+<img alt="predict" src="/images/predic.JPG"/>
+
 # Deployment
-
-### :keyboard: Activity: Your first branch
-
-1. Open a new browser tab, and navigate to this same repository. Then, work on the steps in your second tab while you read the instructions in this tab.
-2. Navigate to the **Code** tab.
-3. Click on the **main** branch drop-down.<br>
-   <img alt="image showing my-first-branch entry" src="/images/my-first-branch.png"/>
-4. In the field, enter a name for your branch: `my-first-branch`.
-5. Click **Create branch: my-first-branch** to create your branch.
-6. Move on to Step 2!<br>
-   **Note**: If you made a public repository, and want to confirm you correctly set up your first branch, wait about 20 seconds then refresh this page (the one you're following instructions from). [GitHub Actions](https://docs.github.com/en/actions) will automatically close this step and open the next one.
-
-</details>
-
-<!-- 
-  <<< Author notes: Step 2 >>>
-  Start this step by acknowledging the previous step.
-  Define terms and link to docs.github.com.
--->
-
-<details id=2>
-<summary><h2>Step 2: Commit a file</h2></summary>
-
-_You created a branch! :tada:_
-
-Creating a branch allows you to edit your project without changing the `main` branch. Now that you have a branch, it’s time to create a file and make your first commit!
-
-**What is a commit?**: A [commit](https://docs.github.com/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/about-commits) is a set of changes to the files and folders in your project. A commit exists in a branch.
-
-### :keyboard: Activity: Your first commit
-
-The following steps will guide you through the process of committing a change on GitHub. Committing a change requires first adding a new file to your new branch. 
-
-1. On the **Code** tab, make sure you're on your new branch `my-first-branch`.
-2. Select the **Add file** drop-down and click **Create new file**.<br>
-   ![create new file option](/images/create-new-file.png)
-3. In the **Name your file...** field, enter `PROFILE.md`.
-4. In the **Edit new file** area, copy the following content to your file:
-   ```
-   Welcome to my GitHub profile!
-   ```
-   <img alt="profile.md file screenshot" src="/images/my-profile-file.png"/>
-5. For commits, you can enter a short commit message that describes what changes you made. This message helps others know what's included in your commit. GitHub offers a simple default message, but let's change it slightly for practice. First, enter `Add PROFILE.md` in the first text-entry field below **Commit new file**. Then, if you want to confirm what your screen should look like, expand the dropdown below.
-   <details>
-   <summary> Expand to see the screenshot.</summary>
-   <img alt="screenshot of adding a new file with a commit message" src="/images/commit-full-screen.png" />
-   </details>
-6. In this lesson, we'll ignore the other fields and click **Commit new file**.
-7. Move on to Step 3! <br>
-   **Note**: Like before, you can wait about 20 seconds, then refresh this page (the one you're following instructions from) and [GitHub Actions](https://docs.github.com/en/actions) will automatically close this step and open the next one.
-
-</details>
-
-<!-- 
-  <<< Author notes: Step 3 >>> 
-  Just a historic note: the previous version of this step forced the learner
-  to write a pull request description,
-  checked that `main` was the receiving branch,
-  and that the file was named correctly.
--->
-
-<details id=3>
-<summary><h2>Step 3: Open a pull request</h2></summary>
-
-_Nice work making that commit :sparkles:_
-
-Now that you’ve created a commit, it’s time to share your proposed change through a pull request!
-
-**What is a pull request?**: Collaboration happens on a pull request. The pull request shows the changes in your branch to other people. This pull request is going to keep the changes you just made on your branch and propose applying them to the `main` branch.
-<br>:tv: [Video: Introduction to pull requests](https://youtu.be/kJr-PIfLDl4)
-
-### :keyboard: Activity: Create a pull request
-
-You may have noticed after your commit that a message displayed indicating your recent push to your branch and providing a button that says **Compare & pull request**.
-
-![screenshot of message and button](/images/compare-and-pull-request.png)
-
- If you want, feel free to click **Compare & pull request**, and then skip to step 6 below. If you don't click the button, the instructions below walk you through manually setting up the pull request.
-
-1. Click on the **Pull requests** tab in your repository.
-2. Click **New pull request**.
-3. In the **base:** dropdown, make sure **main** is selected.
-4. Select the **compare:** dropdown, and click `my-first-branch`. <br>
-   <img alt="screenshot showing both branch selections" src="/images/pull-request-branches.png"/>
-5. Click **Create pull request**.
-6. Enter a title for your pull request: `Add my first file`.
-7. The next field helps you provide a description of the changes you made. Feel free to add a description of what you’ve accomplished so far. As a reminder, you have: created a branch, created a file and made a commit! <br>
-   <img alt="screenshot showing pull request" src="/images/Pull-request-description.png"/>
-8. Click **Create pull request**.
-9. Move on to Step 4! <br>
-   **Note**: Like before, you can wait about 20 seconds, then refresh this page (the one you're following instructions from) and [GitHub Actions](https://docs.github.com/en/actions) will automatically close this step and open the next one. As a perk, you may see evidence of GitHub Actions running on the tab with the pull request opened! The image below shows a line you might see on your pull request after the Action finishes running.<br>
-   <img alt="screenshot of an example of an actions line" src="/images/Actions-to-step-4.png"/>
-
-</details>
-
-<!-- 
-  <<< Author notes: Step 4 >>> 
-  Just a historic note: The previous version of this step required responding
-  to a pull request review before merging. The previous version also handled
-  if users accidentally closed without merging.
--->
-
-<details id=4>
-<summary><h2>Step 4: Merge your pull request</h2></summary>
-
-_Nicely done friend! :sunglasses:_
-
-You successfully created a pull request. You can now merge your pull request.
-
-**What is a _merge_**: A [merge](https://docs.github.com/en/get-started/quickstart/github-glossary#merge) adds the changes in your pull request and branch into the `main` branch.
-<br>:tv: [Video: Understanding the GitHub flow](https://www.youtube.com/watch?v=PBI2Rz-ZOxU)
-
-As noted in the previous step, you may have seen evidence of an action running which automatically progresses your instructions to the next step. You'll have to wait for it to finish before you can merge your pull request. It will be ready when the merge pull request button is green.
-
-![screenshot of green merge pull request button](/images/Green-merge-pull-request.png)
-### :keyboard: Activity: Merge the pull request
-
-1. Click **Merge pull request**.
-1. Click **Confirm merge**.
-1. Once your branch has been merged, you don't need it anymore. To delete this branch, click **Delete branch**.<br>
-   <img alt="screenshot showing delete branch button" src="/images/delete-branch.png"/>
-2. Check out the **Finish** step to see what you can learn next!<br>
-   **Note**: Like before, you can wait about 20 seconds, then refresh this page (the one you're following instructions from) and [GitHub Actions](https://docs.github.com/en/actions) will automatically close this step and open the next one.
-
-</details>
-
-<!-- 
-  <<< Author notes: Finish >>> 
-  Review what we learned, ask for feedback, provide next steps.
--->
-
-<details id=X>
-<summary><h2>Finish</h2></summary>
-
-_Congratulations friend, you've completed this course and joined the world of developers!_
-
-<img src=https://octodex.github.com/images/collabocats.jpg alt=celebrate width=300 align=right>
-
-Here's a recap of your accomplishments:
-
-- You learned about GitHub, repositories, branches, commits, and pull requests.
-- You created a branch, a commit, and a pull request.
-- You merged a pull request.
-- You made your first contribution! :tada:
-
-### What's next?
-
-  If you'd like to make a profile README, use the simplified instructions below or follow the instructions in the [Managing your profile README](https://docs.github.com/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme) article.
-  1. Make a new public repository with a name that matches your GitHub username.
-  2. Create a file named `README.md` in its root. The "root" means not inside any folder in your repository.
-  3. Edit the contents of the `README.md` file.
-  4. If you created a new branch for your file, open and merge a pull request on your branch.
-  5. We'd love to see your new profile! Share your profile on social media and tag us!
-  6. Lastly, we'd love to hear what you thought of this course [in our discussion board](https://github.com/skills/.github/discussions).
-
-Check out these resources to learn more or get involved:
-- Are you a student? Check out the [Student Developer Pack](https://education.github.com/pack).
-- [Take another GitHub Skills course](https://github.com/skills).
-- [Read the GitHub Getting Started docs](https://docs.github.com/en/get-started).
-- To find projects to contribute to, check out [GitHub Explore](https://github.com/explore).
-
-</details>
-
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
-
----
-
-Get help: [Post in our discussion board](https://github.com/skills/.github/discussions) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
-
-&copy; 2022 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [CC-BY-4.0 License](https://creativecommons.org/licenses/by/4.0/legalcode)
