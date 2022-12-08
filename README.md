@@ -8,6 +8,9 @@
 # By Krista Bogan and Jessica Booth
 
 In this analysis, we will be constructing the best classification algorithm for "Seeds", a dataset viewing the various geometric properties of three varieties of wheat seed. The wheat seeds are the varieties Kama, Rosa and Canadian.
+
+<img alt="image showing my-first-branch entry" src="/images/my-first-branch.png"/>
+
 During data collection, a soft X-ray technique and GRAINS package were
 used to create the 7 real attributes in the data set. We will be
 evaluating which algorithm can best classify and predict the wheat
@@ -17,9 +20,9 @@ The data can be found on UCI's Machine Learning repository [here](https://archiv
 
 To run the code in Kaggle, please click [here](https://www.kaggle.com/code/kristabogan/ds-final-project-bogan-booth/notebook)
 
-**Business Understanding**
+# Business Understanding
 
-**Data Understanding**
+# Data Understanding
 
 **What is the purpose of the dataset?**: The purpose of this analysis is to craft a machine learning algorithm to assist the sorting process of wheat seeds in the food industry.
 
@@ -42,7 +45,10 @@ To run the code in Kaggle, please click [here](https://www.kaggle.com/code/krist
 
 **What analyses does the code conduct?**: The code analyzes everything from descriptive statistics to full ML algorithm selected. We began by viewing the boxplots of individual attributions, followed by multivariate plots to evaluate the relationship between the attributions and classes.
 
-<img alt="image showing my-first-branch entry" src="/images/my-first-branch.png"/>
+# Data Preparation
+# Data Modeling
+# Model Evaluation
+# Deployment
 
 ### :keyboard: Activity: Your first branch
 
