@@ -9,7 +9,7 @@
 
 In this analysis, we will be constructing the best classification algorithm for "Seeds", a dataset viewing the various geometric properties of three varieties of wheat seed. The wheat seeds are the varieties Kama, Rosa and Canadian.
 
-<img alt="image showing my-first-branch entry" src="/images/my-first-branch.png"/>
+<img alt="image showing my-first-branch entry" src="/images/Wheat%20Varieties.png"/>
 
 During data collection, a soft X-ray technique and GRAINS package were
 used to create the 7 real attributes in the data set. We will be
