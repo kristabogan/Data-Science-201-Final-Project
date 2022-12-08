@@ -172,14 +172,14 @@ that LDA is consistently the most accurate.
 
 We decided to run the results of LDA separately as a final evaluation.
 As we can see, across the 10-fold cross validations, the LDA algorithm
-had an accuracy of 97.6% Although it isn't perfect, it's definitely a
+had an accuracy of 97% Although it isn't perfect, it's definitely a
 highly accurate classification model for the grouping wheat seeds.
 
 <img alt="accuracy" src="/images/accuracy.JPG"/>
 
 As a final step in our analysis, we made some predictions with our
 algorithm. In our prediction test, the algorithm accuracy was about
-97.4%. It is important to conduct a final check of the accuracy in case
+98%. It is important to conduct a final check of the accuracy in case
 we made an error somewhere in our algorithm building. Overall, we have
 overwhelming evidence to suggest that a Linear Discriminant Analysis
 algorithm is the most proficient in classifying wheat variety by our 7
