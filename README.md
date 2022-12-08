@@ -16,6 +16,7 @@ seed level from the given attributes.
 
 The data can be found on UCI's Machine Learning repository [here](https://archive.ics.uci.edu/ml/datasets/seeds)
 
+To run the code in Kaggle, please click [here](https://www.kaggle.com/code/kristabogan/ds-final-project-bogan-booth/notebook)
 
 
 **What is the purpose of the dataset?**: The purpose of this analysis is to craft a machine learning algorithm to assist the sorting process of wheat seeds in the food industry.
