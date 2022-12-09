@@ -22,6 +22,8 @@ seed level from the given attributes.
 
 # Business Understanding
 
+Before implementing a classification system, it is first important to understand why a classification system for wheat seeds is beneficial. When looking at the three types of wheat seeds in this dataset, Kama, Rosa, and Canadian, each type of wheat serves different purposes. For instance, The Kama seed is best used for digestive problems including, but not limited to, bloating and gastric discomfort. The high fiber content also aids in regulating the body’s blood sugar levels, which may make this form of wheat attractive to diabetics. When looking at the benefits of Canadian wheat, there is a clear indication that this type of wheat tends to be much denser in protein content. The higher levels of protein may be more appealing to people looking to increase their muscle mass, lower blood pressure, or even boost metabolism. Wheat classification can also be used for companies making food products that require a specific type of wheat for production. Wheat, as a whole, contains many health benefits however, the quality of wheat also contributes to its nutritional value. Ensuring that the wheat is authentic gains attention from consumers looking to purchase healthy and undamaged wheat grains. Because of this, companies that purchase wheat for their own production will also be interested in the classification of wheat varieties, to ensure that their products are being made with high quality wheat.  By being able to identify wheat varieties, consumers  and companies will have the advantage of knowing which type of wheat coincides with health, and manufacturing goals. 
+
 # Data Understanding
 
 **What is the purpose of the dataset?**: The purpose of this analysis is to craft a machine learning algorithm to assist the sorting process of wheat seeds in the food industry.
@@ -188,3 +190,5 @@ geometric attributes.
 <img alt="predict" src="/images/predic.JPG"/>
 
 # Deployment
+
+The main beneficiaries of creating a classification system of different varieties of wheat would be wheat consumers and companies who manufacture food products with wheat. To make accessing the results of the classifications accessible to consumers, the differing components of each wheat could be visible on the packaging of the wheat products. For this to be possible, the producers of wheat products need also be made aware of the advantages of specific types of wheat. This requires a strong line of communication between the operators of the classification system, and those purchasing the wheat varieties. In addition, wheat manufacturers need to be able to communicate to companies interested in wheat for product production, so that they are well informed about the differing nutritional value of wheat varieties. This would allow companies to target a specific market, if they are looking to create food for consumption, aimed at consumers with specific health goals.  
