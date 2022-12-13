@@ -28,7 +28,7 @@ Before implementing a classification system, it is first important to understand
 
 **What is the purpose of the dataset?**: The purpose of this analysis is to craft a machine learning algorithm to assist the sorting process of wheat seeds in the food industry.
 
-**What are the attributes of the dataset?**: The dataset views 7 different geometric attributes of kernels. The class for this data set is wheat variety. There are 3 disctinct wheat varieties in the dataset. We could not find specifics on the wheat varieties. 
+**What are the attributes of the dataset?**: The dataset views 7 different geometric attributes of kernels. The class for this data set is wheat variety. There are 3 disctinct wheat varieties in the dataset. The wheat seeds are the varieties Kama, Rosa and Canadian. 
 
 1\. Area, A
 
