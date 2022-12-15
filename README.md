@@ -9,7 +9,9 @@
 
 The data can be found on UCI's Machine Learning repository [here](https://archive.ics.uci.edu/ml/datasets/seeds)
 
-To run the code in Kaggle, please click [here](https://www.kaggle.com/code/kristabogan/ds-final-project-bogan-booth/notebook)
+View our video presentation [here](https://youtu.be/n5ICQobTH1M)
+
+Run the code in Kaggle [here](https://www.kaggle.com/code/kristabogan/ds-final-project-bogan-booth/notebook)
 
 In this analysis, we will be constructing the best classification algorithm for "Seeds", a dataset viewing the various geometric properties of three varieties of wheat seed. The wheat seeds are the varieties Kama, Rosa and Canadian.
 
