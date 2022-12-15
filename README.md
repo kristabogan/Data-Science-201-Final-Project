@@ -7,11 +7,15 @@
 # DS201: Machine Learning Classification on Wheat Seed Varieties
 # By Krista Bogan and Jessica Booth
 
-The data can be found on UCI's Machine Learning repository [here](https://archive.ics.uci.edu/ml/datasets/seeds)
+Materials:
 
-View our video presentation [here](https://youtu.be/n5ICQobTH1M)
+The data can be found on UCI's Machine Learning repository: https://archive.ics.uci.edu/ml/datasets/seeds
 
-Run the code in Kaggle [here](https://www.kaggle.com/code/kristabogan/ds-final-project-bogan-booth/notebook)
+The R Markdown file with our code: https://github.com/kristabogan/ds-final-project/blob/aff86ef8d82792cacbbdcd25bf541a08cb71129a/DS%20Final%20Code%20Markdown.Rmd
+
+Our video presentation: https://youtu.be/n5ICQobTH1M
+
+Run the code in Kaggle: https://www.kaggle.com/code/kristabogan/ds-final-project-bogan-booth/notebook
 
 In this analysis, we will be constructing the best classification algorithm for "Seeds", a dataset viewing the various geometric properties of three varieties of wheat seed. The wheat seeds are the varieties Kama, Rosa and Canadian.
 
